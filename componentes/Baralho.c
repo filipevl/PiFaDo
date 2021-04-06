@@ -29,3 +29,18 @@ char *gerarNaipe(int k)
     }
 }
 
+Baralho *novoBaralho()
+{
+    Baralho *baralho = calloc(55, sizeof(Baralho));
+    for (short i = 0; i < 55; i++)
+    {
+        for (int j = 1; j < 14; j++)
+        {
+            for (int k = 0; k < 4; k++)
+            {
+                baralho[i].carta = j;
+                strcpy(baralho[i].naipe,gerarNaipe(k));
+            }
+        }
+    }
+}
