@@ -43,4 +43,6 @@ Baralho *novoBaralho()
             }
         }
     }
+
+    return baralho;
 }
