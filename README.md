@@ -37,7 +37,7 @@ O sistema fora elaborado em  **linguagem C**, utilizando das estruturas de Dados
 
 ## Licença
 
-Este projeto possui a licença <a href="https://github.com/NadiaOliver/Projeto-de-Estruturas-de-Dados---2018-2/blob/master/License" target="_blank">MIT</a>
+Este projeto possui a licença <a href="https://github.com/filipevl/PiFaDo/blob/master/License" target="_blank">MIT</a>
 
 Copyright © 2021.
 
