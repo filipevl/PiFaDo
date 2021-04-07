@@ -32,8 +32,37 @@ O sistema fora elaborado em  **linguagem C**, utilizando das estruturas de Dados
   
 ### Autores
 
-[<img src="https://avatars.githubusercontent.com/u/53842848?v=4" width="100px;"/><br/><sub><b>Filipe Viana</b></sub>](https://github.com/filipevl)<br /> |[<img src="https://avatars.githubusercontent.com/u/82061209?v=4" width="100px;"/><br /><sub><b>Ramiro Mares</b></sub>](https://github.com/oliveiramiro2)<br />
---------- | ------
+<table style="width:100%">
+    <tr>
+    <th>
+        <div>
+            <img src="https://avatars.githubusercontent.com/u/53842848?v=4" width="100px;">
+            <br/>
+            <sub>
+                <a href="https://github.com/filipevl">Filipe Viana</a>
+            </sub>
+        </div>
+    </th>
+    <th>
+        <div>
+            <img src="https://avatars.githubusercontent.com/u/82061209?v=4" width="100px;">
+            <br/>
+            <sub>
+                <a href="https://github.com/oliveiramiro2">Ramiro Mares</a>
+            </sub>
+        </div>
+    </th>
+    <th>
+        <div>
+            <img src="https://avatars.githubusercontent.com/u/51803896?v=4" width="100px;">
+            <br/>
+            <sub>
+                <a href="https://github.com/leandroUFV">Leandro Oliveira</a>
+            </sub>
+        </div>
+    </th>
+</table>
+
 
 ## Licença
 
