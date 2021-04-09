@@ -1,4 +1,5 @@
 #include <stdlib.h>
+#include <stdio.h>
 #include "Carta.c"
 
 #define TAM_BARALHO 52
@@ -8,20 +9,19 @@ typedef struct sBaralho
     int indice;
 } Baralho;
 
-
 Baralho novoBaralho()
 {
+    short i, count, carta;
     Baralho baralho;
-    for (short i = 0; i < TAM_BARALHO; i++)
+    for (i = 0, count = 0, carta=1; i < TAM_BARALHO; i++, count++, carta++)
     {
-        for (int j = 1; j < 14; j++)
-        {
-            for (int k = 0; k < 4; k++)
-            {
-                baralho.cartas[i].carta = j;
-                strcpy(baralho.cartas[i].naipe,gerarNaipe(k));
-            }
-        }
+        baralho.indice = i;
+        strcpy(baralho.cartas[i].naipe, gerarNaipe(count));
+        baralho.cartas[i].carta = carta;
+        if ( count == 3 )
+            count = -1;
+        if ( carta == 13 )
+            carta = 0;
     }
 
     return baralho;
