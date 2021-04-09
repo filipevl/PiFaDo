@@ -1,4 +1,4 @@
-//#include "../componentes/Baralho.c"
+#include "../componentes/Baralho.c"
 //#include "../componentes/Embaralhar.c"
 
 void imprimirBaralho(Baralho baralho) // teste da função novo baralho
