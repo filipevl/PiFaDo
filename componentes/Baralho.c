@@ -1,45 +1,25 @@
 #include <stdlib.h>
-#include <string.h>
+#include "Carta.c"
 
+#define TAM_BARALHO 52
 typedef struct sBaralho
 {
-    int carta;
-    char naipe[10];
+    Carta cartas[TAM_BARALHO];
+    int indice;
 } Baralho;
 
-char *gerarNaipe(int k)
-{
-    switch (k)
-    {
-    case 0:
-        return "espada";
-        break;
-    case 1:
-        return "paus";
-        break;
-    case 2:
-        return "copas";
-        break;
-    case 3:
-        return "ouro";
-        break;
-    default:
-        return "";
-        break;
-    }
-}
 
-Baralho *novoBaralho()
+Baralho novoBaralho()
 {
-    Baralho *baralho = calloc(55, sizeof(Baralho));
-    for (short i = 0; i < 55; i++)
+    Baralho baralho;
+    for (short i = 0; i < TAM_BARALHO; i++)
     {
         for (int j = 1; j < 14; j++)
         {
             for (int k = 0; k < 4; k++)
             {
-                baralho[i].carta = j;
-                strcpy(baralho[i].naipe,gerarNaipe(k));
+                baralho.cartas[i].carta = j;
+                strcpy(baralho.cartas[i].naipe,gerarNaipe(k));
             }
         }
     }
