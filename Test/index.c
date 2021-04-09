@@ -1,5 +1,5 @@
-#include "../componentes/Baralho.c"
-//#include "../componentes/Embaralhar.c"
+//#include "../componentes/Baralho.c"
+#include "../componentes/Embaralhar.c"
 
 void imprimirBaralho(Baralho baralho) // teste da função novo baralho
 {
@@ -13,7 +13,7 @@ void imprimirBaralho(Baralho baralho) // teste da função novo baralho
 void main()
 {
     Baralho baralho1 = novoBaralho(); 
-    //gerar_numero_aleatorio(&baralho1);
-    imprimirBaralho(baralho1); // teste da função novo baralho
+    gerar_numero_aleatorio(&baralho1);
+    //imprimirBaralho(baralho1); // teste da função novo baralho
     system("pause");
 }
