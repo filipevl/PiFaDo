@@ -2,7 +2,6 @@
 #include <conio.h>
 #include "Baralho.c"
 
-#define TAM_BARALHO 52
 
 int existe_indice(int indices_inclusos[52], int valor, int total){
 	int i;
@@ -21,7 +20,6 @@ void gerar_numero_aleatorio(Baralho *baralho){
 	for(i=0; i<TAM_BARALHO; i++){
 		
 		num = rand() % TAM_BARALHO;
-		printf("\n%d", num);
 		while(existe_indice(indices, num ,i)){
 			num = rand() % TAM_BARALHO;
 		}
