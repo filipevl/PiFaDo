@@ -1,6 +1,7 @@
 //#include "../componentes/Baralho.c"
 #include "../componentes/Embaralhar.c"
 
+
 void imprimirBaralho(Baralho baralho) // teste da função novo baralho
 {
 	int i;
@@ -12,8 +13,18 @@ void imprimirBaralho(Baralho baralho) // teste da função novo baralho
 
 void main()
 {
+	Fila *fila_baralho1;
+	Fila *fila_baralho2;
     Baralho baralho1 = novoBaralho(); 
-    gerar_numero_aleatorio(&baralho1);
+    
+    
+    printf("\nbaralho 1:\n\n");
+    gerar_baralho_aleatorio(&baralho1, &fila_baralho1);
+    imprimi_nao_classico(fila_baralho1);
+    sleep(1);
+    printf("\nbaralho 2:\n\n");
+    gerar_baralho_aleatorio(&baralho1, &fila_baralho2);
+    imprimi_nao_classico(fila_baralho2);
     //imprimirBaralho(baralho1); // teste da função novo baralho
     system("pause");
 }
