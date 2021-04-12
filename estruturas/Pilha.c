@@ -1,6 +1,7 @@
 #include "../componentes/Carta.c"
 
 #define MAX_TAM 3
+#include<stdio.h>
 
 typedef struct sPilha {
     Carta info[MAX_TAM];
@@ -26,13 +27,12 @@ int pilhaCheia(Pilha* pilha) {
 }
 
 
-int push(Pilha* pilha, Carta carta) {
+int push(Pilha* pilha, Carta* carta) {
     if(pilhaCheia(pilha))
         return 0;
 	
 	pilha->topo++;
-    pilha->info[pilha->topo] = carta;
-    
+    pilha->info[pilha->topo].carta;
     return 1;
 }
 
@@ -49,4 +49,28 @@ Carta *pop(Pilha* pilha) {
     return NULL;
 }
 
+void imprimirCarta(Pilha* pilha) {
+    if(!pilhaVazia(pilha))
+        printf("\nNome: %d - Idade: %s.", pilha->info[pilha->topo].carta, pilha->info[pilha->topo].naipe);
+}
 
+void imprimirTodos(Pilha* pilha) {
+    Pilha aux;
+    inicializar(&aux);
+
+    while(pilha->topo != -1) {
+        imprimirCarta(pilha);
+        push(&aux, pop(pilha));
+    }
+
+    while(aux.topo != -1)
+        push(pilha, pop(&aux));
+
+    printf("\n");
+}
+void imprimirPilhaDel(Pilha* pilha) { // mostrar cartas que ja foram removidas
+    while(pilha->topo != -1) {
+        imprimirCarta(pilha);
+        pop(pilha);
+    }
+}
