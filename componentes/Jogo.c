@@ -1,5 +1,7 @@
 #include "../componentes/Embaralhar.c"
 
+
+// essa função vai pegar o valor da carta EXEMPLO: carta com valor 1 e trocar por A de ás para ser exibido na tela
 char mostra_valor(Fila *baralho, char **valor){
 	
 	switch (baralho->inicio->carta_fila.carta){
