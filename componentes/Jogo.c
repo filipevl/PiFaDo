@@ -1,6 +1,6 @@
 #include "../estruturas/Deque.c"
 
-char* mostra_valor(Fila *baralho)
+char *mostra_valor(Fila *baralho)
 {
 	char *carta;
 	switch (baralho->inicio->carta_fila.carta)
