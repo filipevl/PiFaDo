@@ -26,6 +26,7 @@ void main()
     //gerar_baralho_aleatorio(&baralho1, &fila_baralho2);
     //imprimi_nao_classico(fila_baralho2);
     //imprimirBaralho(baralho1); // teste da função novo baralho
-    jogo();
+    jogo(); // chamada do jogo
     system("pause");
+    return 0;
 }
