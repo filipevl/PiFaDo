@@ -1,7 +1,6 @@
 #include "../estruturas/Deque.c"
 
-char mostra_valor(Fila *baralho, char **valor){
-	
+void mostra_valor(Fila *baralho, char **valor){
 	switch (baralho->inicio->carta_fila.carta){
 		case 1:
 			*valor = "A";
@@ -56,7 +55,7 @@ void jogo(){
 	Fila *monte1;
 	Fila *monte2;
     Baralho baralho1 = novoBaralho();
-    //criando estruturas que geram os espaços e1,e2,e3,e4
+    //criando estruturas que geram os espaï¿½os e1,e2,e3,e4
     DEQUE *espaco1_1, *espaco2_1, *espaco3_1, *espaco4_1; //jogador 1
     DEQUE *espaco1_2, *espaco2_2, *espaco3_2, *espaco4_2; //jogador 2
     
@@ -64,7 +63,7 @@ void jogo(){
     gerar_baralho_aleatorio(&baralho1, &monte1);
     sleep(1);
     gerar_baralho_aleatorio(&baralho1, &monte2);
-    //iniciando os espaços e1,e2,e3,e4 dos 2 jogadores
+    //iniciando os espaï¿½os e1,e2,e3,e4 dos 2 jogadores
     alocar_deque(&espaco1_1);
     alocar_deque(&espaco2_1);
     alocar_deque(&espaco3_1);
@@ -86,7 +85,7 @@ void jogo(){
 	    int contador = 0; // contador de cartas
     	char *valor_carta; // mostra o valor da carta
     	int jogada; // variavel que decide acao do jogador
-    	NO_DEQUE *aux; // var para checar quantas cartas ja existem nos espaços
+    	NO_DEQUE *aux; // var para checar quantas cartas ja existem nos espaï¿½os
     	
     	printf("\nJogador %d\nDigite 1 para tirar a carta do monte principal ou 2 para tirar do seu espaco: ", jogador);
     	scanf("%d", &jogada);
@@ -102,13 +101,13 @@ void jogo(){
     			    scanf("%d", &jogada);
 				}while(jogada<1 && jogada>3);
 				
-    			if(jogada == 1){ // inserir em algum espaço e1,e2,e3,e4
+    			if(jogada == 1){ // inserir em algum espaï¿½o e1,e2,e3,e4
     				do{
     					printf("\nDigite 1 inserir e1, 2 inserir e2, 3 inserir e3 e 4 inserir e4: ");
     		    	    scanf("%d", &jogada);
 					}while(jogada<1 && jogada>4);
     				
-    				if(jogada == 1){ // inserir espaço 1
+    				if(jogada == 1){ // inserir espaï¿½o 1
     				    
     				    if(!deque_vazio(espaco1_1)){ // se o deque nao estiver vazio
     				        aux = espaco1_1->inicio;
@@ -127,7 +126,7 @@ void jogo(){
 						    	imprimir(espaco1_1);
 							}
 							if(contador == 3){
-								printf("\nO espaço possui 3 cartas ja.");
+								printf("\nO espaï¿½o possui 3 cartas ja.");
 							}
 													    
 						}else{ // se o deque estiver vazio
@@ -137,7 +136,7 @@ void jogo(){
 						}	
 					}
 					
-					if(jogada == 2){ // inserir espaço 2
+					if(jogada == 2){ // inserir espaï¿½o 2
     					if(!deque_vazio(espaco2_1)){ // se o deque nao estiver vazio
     				        aux = espaco2_1->inicio;
     				        while(espaco2_1->inicio != NULL){
@@ -155,7 +154,7 @@ void jogo(){
 						    	imprimir(espaco2_1);
 							}
 							if(contador == 3){
-								printf("\nO espaço possui 3 cartas ja.");
+								printf("\nO espaï¿½o possui 3 cartas ja.");
 							}
 													    
 						}else{ // se o deque estiver vazio
@@ -165,7 +164,7 @@ void jogo(){
 						}
 					}
 					
-					if(jogada == 3){ // inserir espaço 3
+					if(jogada == 3){ // inserir espaï¿½o 3
     					if(!deque_vazio(espaco3_1)){ // se o deque nao estiver vazio
     				        aux = espaco3_1->inicio;
     				        while(espaco3_1->inicio != NULL){
@@ -183,7 +182,7 @@ void jogo(){
 						    	imprimir(espaco3_1);
 							}
 							if(contador == 3){
-								printf("\nO espaço possui 3 cartas ja.");
+								printf("\nO espaï¿½o possui 3 cartas ja.");
 							}
 													    
 						}else{ // se o deque estiver vazio
@@ -192,7 +191,7 @@ void jogo(){
 							imprimir(espaco3_1);	
 						}
 					}
-					if(jogada == 4){ // inserir espaço 4
+					if(jogada == 4){ // inserir espaï¿½o 4
     					if(!deque_vazio(espaco4_1)){ // se o deque nao estiver vazio
     				        aux = espaco4_1->inicio;
     				        while(espaco4_1->inicio != NULL){
@@ -210,7 +209,7 @@ void jogo(){
 						    	imprimir(espaco4_1);
 							}
 							if(contador == 3){
-								printf("\nO espaço possui 3 cartas ja.");
+								printf("\nO espaï¿½o possui 3 cartas ja.");
 							}
 													    
 						}else{ // se o deque estiver vazio
@@ -232,13 +231,13 @@ void jogo(){
     			    scanf("%d", &jogada);
 				}while(jogada<1 && jogada>3);
 				
-    			if(jogada == 1){ // inserir em algum espaço e1,e2,e3,e4
+    			if(jogada == 1){ // inserir em algum espaï¿½o e1,e2,e3,e4
     				do{
     					printf("\nDigite 1 inserir e1, 2 inserir e2, 3 inserir e3 e 4 inserir e4: ");
     		    	    scanf("%d", &jogada);
 					}while(jogada<1 && jogada>4);
     				
-    				if(jogada == 1){ // inserir espaço 1
+    				if(jogada == 1){ // inserir espaï¿½o 1
     				    
     				    if(!deque_vazio(espaco1_2)){ // se o deque nao estiver vazio
     				        aux = espaco1_2->inicio;
@@ -257,7 +256,7 @@ void jogo(){
 						    	imprimir(espaco1_2);
 							}
 							if(contador == 3){
-								printf("\nO espaço possui 3 cartas ja.");
+								printf("\nO espaï¿½o possui 3 cartas ja.");
 							}
 						    
 						}else{ // se o deque estiver vazio
@@ -267,7 +266,7 @@ void jogo(){
 						}	
 					}
 					
-					if(jogada == 2){ // inserir espaço 2
+					if(jogada == 2){ // inserir espaï¿½o 2
     					if(!deque_vazio(espaco2_2)){ // se o deque nao estiver vazio
     				        aux = espaco2_2->inicio;
     				        while(espaco2_2->inicio != NULL){
@@ -285,7 +284,7 @@ void jogo(){
 						    	imprimir(espaco2_2);
 							}
 							if(contador == 3){
-								printf("\nO espaço possui 3 cartas ja.");
+								printf("\nO espaï¿½o possui 3 cartas ja.");
 							}
 						    
 						}else{ // se o deque estiver vazio
@@ -295,7 +294,7 @@ void jogo(){
 						}
 					}
 					
-					if(jogada == 3){ // inserir espaço 3
+					if(jogada == 3){ // inserir espaï¿½o 3
     					if(!deque_vazio(espaco3_2)){ // se o deque nao estiver vazio
     				        aux = espaco3_2->inicio;
     				        while(espaco3_2->inicio != NULL){
@@ -313,7 +312,7 @@ void jogo(){
 						    	imprimir(espaco3_2);
 							}
 							if(contador == 3){
-								printf("\nO espaço possui 3 cartas ja.");
+								printf("\nO espaï¿½o possui 3 cartas ja.");
 							}
 						    
 						}else{ // se o deque estiver vazio
@@ -322,7 +321,7 @@ void jogo(){
 							imprimir(espaco3_2);	
 						}
 					}
-					if(jogada == 4){ // inserir espaço 4
+					if(jogada == 4){ // inserir espaï¿½o 4
     					if(!deque_vazio(espaco4_2)){ // se o deque nao estiver vazio
     				        aux = espaco4_2->inicio;
     				        while(espaco4_2->inicio != NULL){
@@ -340,7 +339,7 @@ void jogo(){
 						    	imprimir(espaco4_2);
 							}
 							if(contador == 3){
-								printf("\nO espaço possui 3 cartas ja.");
+								printf("\nO espaï¿½o possui 3 cartas ja.");
 							}
 						    
 						}else{ // se o deque estiver vazio
@@ -359,7 +358,7 @@ void jogo(){
 				jogador = 1;
 			}
 		}else if(jogada == 2){
-			//jogador tira a primeira carta do seu espaço pessoal
+			//jogador tira a primeira carta do seu espaï¿½o pessoal
 			
 			//logica ...
 			
