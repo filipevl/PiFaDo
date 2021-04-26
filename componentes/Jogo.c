@@ -47,7 +47,40 @@ char *mostra_valor(Fila *baralho)
 	}
 }
 
-void jogo(){
+int tirarCartaDoMontePrincipal(Fila *monte, DEQUE **espacos)
+{
+	short jogada;
+	char *carta = mostra_valor(monte); // Retira do inicio da fila
+	system("clear || cls");
+
+	printf("\nCarta virada: %s \n\n", carta);
+	do
+	{
+		printf("\nOpcoes\n1. Inserir nos espacos E1,E2,E3,E4\n2. Inserir no espaco X1\n3. Descartar no fim do baralho\nDigite uma opcao valida: ");
+		scanf("%d", &jogada);
+		getchar();
+	} while (jogada < 1 && jogada > 3);
+	switch (jogada)
+	{
+	case 1:
+		if (inserirNosEspacos(*espacos))
+			printf("\nCarta inserida com sucesso\n");
+		else
+			printf("\nCARTA NAO INSERIDA\n");
+		break;
+	case 2:
+		// inserirNoX1();
+		break;
+	case 3:
+		// descartarNoFim();
+	default:
+		break;
+	}
+}
+
+
+void jogo()
+{
 	//variavel que para o loop do jogo
 	int loop_jogo = 1;
 	// variavel que indica qual jogador esta realizando a acao
