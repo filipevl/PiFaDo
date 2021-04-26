@@ -62,31 +62,26 @@ void enfileirar(Fila **fila, int valor_carta, char naipe[10]){
 }
 
 void desenfileirar(Fila **fila){
+	NO *aux;
 	
-}
-
-void imprimi_nao_classico(Fila *fila){
-	NO *inicio, *fim;
-	alocar_carta(&inicio);
-	alocar_carta(&fim);
+	alocar_carta(&aux);
 	
-	if(!fila_vazia(fila)){
-		inicio = fila->inicio;
-		fim = fila->fim;
-		while(fila->inicio->prox != NULL){
-			printf("Valor da carta: %d -- naipe: %s\n", fila->inicio->carta_fila.carta, fila->inicio->carta_fila.naipe);
-			fila->inicio = fila->inicio->prox;
+	if(aux != NULL){
+		if(fila_vazia(*fila)){
+			printf("\nFila vazia.");
+		}else{
+			if((*fila)->inicio != (*fila)->fim){
+				aux = (*fila)->inicio->prox;
+				desalocar_carta(&(*fila)->inicio);
+				(*fila)->inicio = aux;
+				return;
+			}
+			desalocar_fila(fila);
+			alocar_fila(fila);
+			iniciar_fila(fila);	
 		}
-		printf("Valor da carta: %d -- naipe: %s\n", fila->inicio->carta_fila.carta, fila->inicio->carta_fila.naipe);
-		fila->fim = fim;
-		fila->inicio = inicio;
-		return;
 	}else{
-		printf("\nErro fila vazia.");
-		return;
-	}
+		printf("\nErro na alocacao do no.");
+    }
 }
 
-void imprimi_classico(Fila **fila){
-	
-}
