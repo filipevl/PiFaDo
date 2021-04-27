@@ -14,8 +14,6 @@ void jogo(){
     //criando estruturas que geram os espaços e1,e2,e3,e4
     DEQUE *espaco1_1, *espaco2_1, *espaco3_1, *espaco4_1; //jogador 1
     DEQUE *espaco1_2, *espaco2_2, *espaco3_2, *espaco4_2; //jogador 2
-    	NO_DEQUE *aux; // var para checar quantas cartas ja existem nos espaços
-	int contador = 0; // contador de cartas
     
     //gerando 2 baralhos aleatorios
     gerar_baralho_aleatorio(&baralho1, &monte1);
