@@ -53,6 +53,108 @@ int eh_sequencia(DEQUE *deque)
     return 0;
 }
 
+char *toString(int num)
+{
+	switch (num)
+	{
+	case 1:
+		return "A ";
+		break;
+	case 2:
+		return "2 ";
+		break;
+	case 3:
+		return "3 ";
+		break;
+	case 4:
+		return "4 ";
+		break;
+	case 5:
+		return "5 ";
+		break;
+	case 6:
+		return "6 ";
+		break;
+	case 7:
+		return "7 ";
+		break;
+	case 8:
+		return "8 ";
+		break;
+	case 9:
+		return "9 ";
+		break;
+	case 10:
+		return "10 ";
+		break;
+	case 11:
+		return "J ";
+		break;
+	case 12:
+		return "Q ";
+		break;
+	case 13:
+		return "K ";
+		break;
+	default:
+		return "";
+		break;
+	}
+}
+
+char *carta_naipe(Fila *baralho)
+{
+	char *carta = calloc(30,sizeof(char));
+
+	Carta cartaInicio = baralho->inicio->carta_fila;
+	strcpy(carta, toString(cartaInicio.carta));
+
+	getchar();
+	switch (cartaInicio.carta)
+	{
+	case 1:
+		strcat(carta, cartaInicio.naipe);
+		break;
+	case 2:
+		strcat(carta, cartaInicio.naipe);
+		break;
+	case 3:
+		strcat(carta, cartaInicio.naipe);
+		break;
+	case 4:
+		strcat(carta, cartaInicio.naipe);
+		break;
+	case 5:
+		strcat(carta, cartaInicio.naipe);
+		break;
+	case 6:
+		strcat(carta, cartaInicio.naipe);
+		break;
+	case 7:
+		strcat(carta, cartaInicio.naipe);
+		break;
+	case 8:
+		strcat(carta, cartaInicio.naipe);
+		break;
+	case 9:
+		strcat(carta, cartaInicio.naipe);
+		break;
+	case 10:
+		strcat(carta, cartaInicio.naipe);
+		break;
+	case 11:
+		strcat(carta, cartaInicio.naipe);
+		break;
+	case 12:
+		strcat(carta, cartaInicio.naipe);
+		break;
+	case 13:
+		strcat(carta, cartaInicio.naipe);
+		break;
+	}
+	return carta;
+}
+
 char mostra_valor(Fila *baralho, char **valor){
 	
 	switch (baralho->inicio->carta_fila.carta){
@@ -99,7 +201,7 @@ char mostra_valor(Fila *baralho, char **valor){
 }
 
 int inserir_carta_espaco(DEQUE **espaco, Fila **monte){
-	NO_DEQUE *aux, *aux2; // var para checar quantas cartas ja existem nos espaços, e inserir uma terceira carta entre 2 cartas
+	NO_DEQUE *aux, *aux2; // var para checar quantas cartas ja existem nos espaï¿½os, e inserir uma terceira carta entre 2 cartas
 	int contador = 0; // contador de cartas
 	
 	if(!deque_vazio(*espaco)){ // se o deque nao estiver vazio
