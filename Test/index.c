@@ -28,5 +28,4 @@ void main()
     //imprimirBaralho(baralho1); // teste da função novo baralho
     jogo(); // chamada do jogo
     system("pause");
-    return 0;
 }
