@@ -1,5 +1,58 @@
 #include "../estruturas/Deque.c"
 
+int eh_igual(int a, int b, int c)
+{
+    if (a == b && b == c)
+        return 1;
+    return 0;
+}
+
+int eh_sucessor(int a, int b, int c)
+{
+    if (a > b && b > c)
+        return 1;
+    return 0;
+}
+
+int eh_antecessor(int a, int b, int c)
+{
+    if (a < b < c)
+        return 1;
+    return 0;
+}
+
+int eh_sequencia(DEQUE *deque)
+{
+    int igual;
+	int valores [3];
+    if (deque_vazio(deque))
+        return 0;
+	else if(deque->inicio == 0 || (deque->inicio)->proximo == 0 || deque->fim == 0)
+		return 0;
+    else
+    {
+        valores[0] = deque->inicio->cartas.carta;
+        valores[1] = ((deque->inicio)->proximo)->cartas.carta;
+        valores[2] = deque->fim->cartas.carta;
+
+        if (eh_igual(valores[0], valores[1], valores[2]))
+            return 1;
+
+        if (
+            eh_antecessor(valores[0], valores[1], valores[2]) ||
+            eh_antecessor(valores[1], valores[2], valores[0]) ||
+            eh_antecessor(valores[2], valores[0], valores[1]))
+            return 1;
+
+        if (
+            eh_sucessor(valores[0], valores[1], valores[2]) ||
+            eh_sucessor(valores[1], valores[2], valores[0]) ||
+            eh_sucessor(valores[2], valores[0], valores[1]))
+            return 1;
+    }
+    return 0;
+}
+
 char mostra_valor(Fila *baralho, char **valor){
 	
 	switch (baralho->inicio->carta_fila.carta){
@@ -45,33 +98,51 @@ char mostra_valor(Fila *baralho, char **valor){
 	}
 }
 
-void inserir_carta_espaco(DEQUE **espaco, Fila **monte){
-	NO_DEQUE *aux; // var para checar quantas cartas ja existem nos espaços
+int inserir_carta_espaco(DEQUE **espaco, Fila **monte){
+	NO_DEQUE *aux, *aux2; // var para checar quantas cartas ja existem nos espaços, e inserir uma terceira carta entre 2 cartas
 	int contador = 0; // contador de cartas
 	
 	if(!deque_vazio(*espaco)){ // se o deque nao estiver vazio
-    	aux = (*espaco)->inicio;
+    	aux = (*espaco)->inicio; 
     	while((*espaco)->inicio != NULL){ // checando quantas cartas ja tem no baralho
-    	   	contador++;
+    	   	contador++; // contando quantos elementos ja existem no espaco
     	   	(*espaco)->inicio = (*espaco)->inicio->proximo;
 		}
 		(*espaco)->inicio = aux;
-    	if((*espaco)->inicio->cartas.carta >= (*monte)->fim->carta_fila.carta && contador < 3){ // se a primeira carta do espaco for menor ou igual a nova
-    	    inserir_inicio(espaco, (*monte)->inicio->carta_fila.carta, (*monte)->inicio->carta_fila.naipe);
+    	if((*espaco)->inicio->cartas.carta <= (*monte)->inicio->carta_fila.carta){ // se a primeira carta do espaco for menor ou igual a nova
+    	    // se a carta for maior que todas que o espaco possui
+			inserir_inicio(espaco, (*monte)->inicio->carta_fila.carta, (*monte)->inicio->carta_fila.naipe);
     	    desenfileirar(monte);
     	    imprimir(*espaco);
-		}else if((*espaco)->inicio->cartas.carta <= (*monte)->fim->carta_fila.carta && contador < 3){
-		   	inserir_fim(espaco, (*monte)->inicio->carta_fila.carta, (*monte)->inicio->carta_fila.naipe);
+		}else if((*espaco)->inicio->cartas.carta > (*monte)->inicio->carta_fila.carta && (*espaco)->fim->cartas.carta > (*monte)->inicio->carta_fila.carta){
+		   	// se a carta for menor que todos que o espaco possui
+			inserir_fim(espaco, (*monte)->inicio->carta_fila.carta, (*monte)->inicio->carta_fila.naipe);
 		   	desenfileirar(monte);
 		   	imprimir(*espaco);
-		}
-		if(contador == 3){
-			printf("\nO espaço possui 3 cartas ja.");
-		}
-												    
+		}else if((*espaco)->inicio->cartas.carta > (*monte)->inicio->carta_fila.carta && (*espaco)->fim->cartas.carta <= (*monte)->inicio->carta_fila.carta){
+			// se a carta for maior que a ultima e menor que a primeira
+			aux = (*espaco)->fim;
+			aux2 = (*espaco)->inicio;
+			iniciar_deque(espaco);
+			inserir_inicio(espaco, aux2->cartas.carta, aux2->cartas.naipe);
+			inserir_fim(espaco, (*monte)->inicio->carta_fila.carta, (*monte)->inicio->carta_fila.naipe);
+			inserir_fim(espaco, aux->cartas.carta, aux->cartas.naipe);
+			imprimir(*espaco);
+		}		 								    
 	}else{ // se o deque estiver vazio
 	    inserir_inicio(espaco, (*monte)->inicio->carta_fila.carta, (*monte)->inicio->carta_fila.naipe);
 		desenfileirar(monte); 
 		imprimir(*espaco);	
 	}	
+	
+	contador++; // se o jogador possuir 3 cartas ao fim da jogada entao verificamos pontos
+	if(contador == 3){
+		apagar_todos_nos(espaco);
+		
+		if(eh_sequencia(*espaco)){
+			return 1;
+		}
+	}
+		
+	return 0;
 }
