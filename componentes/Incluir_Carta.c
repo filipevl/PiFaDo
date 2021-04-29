@@ -155,64 +155,24 @@ char *carta_naipe(Fila *baralho)
 	return carta;
 }
 
-char mostra_valor(Fila *baralho, char **valor){
-	
-	switch (baralho->inicio->carta_fila.carta){
-		case 1:
-			*valor = "A";
-			break;
-		case 2:
-			*valor = "2";
-			break;
-		case 3:
-			*valor = "3";
-			break;
-		case 4:
-			*valor = "4";
-			break;
-		case 5:
-			*valor = "5";
-			break;
-		case 6:
-			*valor = "6";
-			break;
-		case 7:
-			*valor = "7";
-			break;
-		case 8:
-			*valor = "8";
-			break;
-		case 9:
-			*valor = "9";
-			break;
-		case 10:
-			*valor = "10";
-			break;
-		case 11:
-			*valor = "J";
-			break;
-		case 12:
-			*valor = "Q";
-			break;
-		case 13:
-			*valor = "K";
-			break;
-	}
+int dequeValido(DEQUE *espaco)
+{
+	if (numeroDeCartasNoDeque(espaco) < 4)
+		return 1;
+	return 0;
 }
 
-int dequeValido(DEQUE **espaco)
+int numeroDeCartasNoDeque(DEQUE *espaco)
 {
 	int cont;
 	NO_DEQUE *aux;
-	aux = (*espaco)->inicio;
+	aux = espaco->inicio;
 	while (aux != NULL)
 	{			// checando quantas cartas ja tem no baralho
 		cont++; // contando quantos elementos ja existem no espaco
 		aux = aux->proximo;
 	}
-	if (cont < 4)
-		return 1;
-	return 0;
+	return cont;
 }
 
 int inserir_carta_espaco(DEQUE **espaco, Fila **monte)
