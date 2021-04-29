@@ -200,7 +200,23 @@ char mostra_valor(Fila *baralho, char **valor){
 	}
 }
 
-int inserir_carta_espaco(DEQUE **espaco, Fila **monte){
+int dequeValido(DEQUE **espaco)
+{
+	int cont;
+	NO_DEQUE *aux;
+	aux = (*espaco)->inicio;
+	while (aux != NULL)
+	{			// checando quantas cartas ja tem no baralho
+		cont++; // contando quantos elementos ja existem no espaco
+		aux = aux->proximo;
+	}
+	if (cont < 4)
+		return 1;
+	return 0;
+}
+
+int inserir_carta_espaco(DEQUE **espaco, Fila **monte)
+{
 	NO_DEQUE *aux, *aux2; // var para checar quantas cartas ja existem nos espa�os, e inserir uma terceira carta entre 2 cartas
 	int contador = 0; // contador de cartas
 	
