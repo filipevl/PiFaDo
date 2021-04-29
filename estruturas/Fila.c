@@ -12,12 +12,6 @@ typedef struct sFila
 	NO *fim;
 } Fila;
 
-void iniciar_fila(Fila **fila)
-{
-	(*fila)->inicio = NULL;
-	(*fila)->fim = NULL;
-}
-
 void alocar_carta(NO **no)
 {
 	*no = (NO *)malloc(sizeof(NO));
@@ -41,25 +35,44 @@ void desalocar_fila(Fila **fila)
 	*fila = NULL;
 }
 
-int fila_vazia(Fila *fila)
+int iniciar_fila(Fila **fila)
 {
-	if (fila->fim == NULL && fila->inicio == NULL)
+	if ((*fila) == 0)
+		(*fila) = malloc(sizeof(Fila));
+
+	if ((*fila) != 0)
 	{
+		(*fila)->inicio = NULL;
+		(*fila)->fim = NULL;
 		return 1;
 	}
 	return 0;
 }
 
-void enfileirar(Fila **fila, int valor_carta, char naipe[10])
+int fila_vazia(Fila *fila)
+{
+	if (fila == 0)
+	{
+		return 1;
+	}
+	else
+	{
+		if (fila->fim == 0 && fila->inicio == 0)
+			return 1;
+	}
+	return 0;
+}
+
+int enfileirar(Fila **fila, int valor_carta, char *naipe)
 {
 	NO *novo;
 	alocar_carta(&novo);
 
-	if (novo != NULL)
+	if (novo != 0)
 	{
 		novo->carta_fila.carta = valor_carta;
 		strcpy(novo->carta_fila.naipe, naipe);
-		novo->prox = NULL;
+		novo->prox = 0;
 		if (fila_vazia(*fila))
 		{
 			(*fila)->inicio = novo;
@@ -70,49 +83,53 @@ void enfileirar(Fila **fila, int valor_carta, char naipe[10])
 			(*fila)->fim->prox = novo;
 			(*fila)->fim = novo;
 		}
+		return 1;
 	}
 	else
 	{
 		printf("\nErro na alocacao do no.");
 	}
+	return 0;
 }
 
 Carta desenfileirar(Fila **fila)
 {
 	NO *aux;
-	Carta carta;
+	Carta carta_removida;
 
 	alocar_carta(&aux);
 
-	if (aux != NULL)
+	if (aux != 0)
 	{
 		if (fila_vazia(*fila))
 		{
-			printf("\nFila vazia.");
-			return;
+			printf("\nFila vazia.\n");
+			getchar();
 		}
 		else
 		{
-			carta = (*fila)->inicio->carta_fila;
+			carta_removida.carta = (*fila)->inicio->carta_fila.carta;
+			strcpy(carta_removida.naipe, (*fila)->inicio->carta_fila.naipe);
+
 			if ((*fila)->inicio != (*fila)->fim)
 			{
 				aux = (*fila)->inicio->prox;
-				desalocar_carta(&(*fila)->inicio);
+				free((*fila)->inicio);
 				(*fila)->inicio = aux;
 			}
 			else
 			{
-				desalocar_fila(fila);
-				alocar_fila(fila);
-				iniciar_fila(fila);
+				free((*fila)->inicio);
+				(*fila)->inicio = 0;
+				(*fila)->fim = (*fila)->inicio;
 			}
-
-			return carta;
 		}
 	}
 	else
 	{
 		printf("\nErro na alocacao do no.");
-		return;
+		exit(1);
 	}
+
+	return carta_removida;
 }
