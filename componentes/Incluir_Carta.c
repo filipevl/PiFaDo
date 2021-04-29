@@ -102,64 +102,53 @@ char *toString(int num)
 	}
 }
 
-char *carta_naipe(Fila *baralho)
+char *carta_naipe(Carta carta_desempilhada)
 {
-	char *carta = calloc(30, sizeof(char));
-
-	Carta cartaInicio = baralho->inicio->carta_fila;
-	strcpy(carta, toString(cartaInicio.carta));
-
-	getchar();
-	switch (cartaInicio.carta)
+	char *carta = calloc(15,sizeof(char));
+	strcpy(carta, toString(carta_desempilhada.carta));
+	switch (carta_desempilhada.carta)
 	{
 	case 1:
-		strcat(carta, cartaInicio.naipe);
+		strcat(carta, carta_desempilhada.naipe);
 		break;
 	case 2:
-		strcat(carta, cartaInicio.naipe);
+		strcat(carta, carta_desempilhada.naipe);
 		break;
 	case 3:
-		strcat(carta, cartaInicio.naipe);
+		strcat(carta, carta_desempilhada.naipe);
 		break;
 	case 4:
-		strcat(carta, cartaInicio.naipe);
+		strcat(carta, carta_desempilhada.naipe);
 		break;
 	case 5:
-		strcat(carta, cartaInicio.naipe);
+		strcat(carta, carta_desempilhada.naipe);
 		break;
 	case 6:
-		strcat(carta, cartaInicio.naipe);
+		strcat(carta, carta_desempilhada.naipe);
 		break;
 	case 7:
-		strcat(carta, cartaInicio.naipe);
+		strcat(carta, carta_desempilhada.naipe);
 		break;
 	case 8:
-		strcat(carta, cartaInicio.naipe);
+		strcat(carta, carta_desempilhada.naipe);
 		break;
 	case 9:
-		strcat(carta, cartaInicio.naipe);
+		strcat(carta, carta_desempilhada.naipe);
 		break;
 	case 10:
-		strcat(carta, cartaInicio.naipe);
+		strcat(carta, carta_desempilhada.naipe);
 		break;
 	case 11:
-		strcat(carta, cartaInicio.naipe);
+		strcat(carta, carta_desempilhada.naipe);
 		break;
 	case 12:
-		strcat(carta, cartaInicio.naipe);
+		strcat(carta, carta_desempilhada.naipe);
 		break;
 	case 13:
-		strcat(carta, cartaInicio.naipe);
+		strcat(carta, carta_desempilhada.naipe);
 		break;
 	}
 	return carta;
-}
-
-int dequeValido(DEQUE *espaco)
-{
-	if (numeroDeCartasNoDeque(espaco) < 4)
-		return 1;
-	return 0;
 }
 
 int numeroDeCartasNoDeque(DEQUE *espaco)
@@ -175,7 +164,14 @@ int numeroDeCartasNoDeque(DEQUE *espaco)
 	return cont;
 }
 
-int inserir_carta_espaco(DEQUE **espaco, Fila **monte)
+int dequeValido(DEQUE *espaco)
+{
+	if (numeroDeCartasNoDeque(espaco) < 4)
+		return 1;
+	return 0;
+}
+
+int inserir_carta_espaco(DEQUE **espaco, Carta carta_nova)
 {
 	NO_DEQUE *aux, *aux2; // var para checar quantas cartas ja existem nos espa�os, e inserir uma terceira carta entre 2 cartas
 	int contador = 0;	  // contador de cartas
@@ -189,36 +185,33 @@ int inserir_carta_espaco(DEQUE **espaco, Fila **monte)
 			(*espaco)->inicio = (*espaco)->inicio->proximo;
 		}
 		(*espaco)->inicio = aux;
-		if ((*espaco)->inicio->cartas.carta <= (*monte)->inicio->carta_fila.carta)
+		if ((*espaco)->inicio->cartas.carta <= carta_nova.carta)
 		{ // se a primeira carta do espaco for menor ou igual a nova
 			// se a carta for maior que todas que o espaco possui
-			inserir_inicio(espaco, (*monte)->inicio->carta_fila.carta, (*monte)->inicio->carta_fila.naipe);
-			desenfileirar(monte);
+			inserir_inicio(espaco, carta_nova.carta, carta_nova.naipe);
 			imprimir(*espaco);
 		}
-		else if ((*espaco)->inicio->cartas.carta > (*monte)->inicio->carta_fila.carta && (*espaco)->fim->cartas.carta > (*monte)->inicio->carta_fila.carta)
+		else if ((*espaco)->inicio->cartas.carta > carta_nova.carta && (*espaco)->fim->cartas.carta > carta_nova.carta)
 		{
 			// se a carta for menor que todos que o espaco possui
-			inserir_fim(espaco, (*monte)->inicio->carta_fila.carta, (*monte)->inicio->carta_fila.naipe);
-			desenfileirar(monte);
+			inserir_fim(espaco, carta_nova.carta, carta_nova.naipe);
 			imprimir(*espaco);
 		}
-		else if ((*espaco)->inicio->cartas.carta > (*monte)->inicio->carta_fila.carta && (*espaco)->fim->cartas.carta <= (*monte)->inicio->carta_fila.carta)
+		else if ((*espaco)->inicio->cartas.carta > carta_nova.carta && (*espaco)->fim->cartas.carta <= carta_nova.carta)
 		{
 			// se a carta for maior que a ultima e menor que a primeira
 			aux = (*espaco)->fim;
 			aux2 = (*espaco)->inicio;
 			iniciar_deque(espaco);
 			inserir_inicio(espaco, aux2->cartas.carta, aux2->cartas.naipe);
-			inserir_fim(espaco, (*monte)->inicio->carta_fila.carta, (*monte)->inicio->carta_fila.naipe);
+			inserir_fim(espaco, carta_nova.carta, carta_nova.naipe);
 			inserir_fim(espaco, aux->cartas.carta, aux->cartas.naipe);
 			imprimir(*espaco);
 		}
 	}
 	else
 	{ // se o deque estiver vazio
-		inserir_inicio(espaco, (*monte)->inicio->carta_fila.carta, (*monte)->inicio->carta_fila.naipe);
-		desenfileirar(monte);
+		inserir_inicio(espaco, carta_nova.carta, carta_nova.naipe);
 		imprimir(*espaco);
 	}
 
