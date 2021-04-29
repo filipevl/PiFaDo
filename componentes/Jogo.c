@@ -1,10 +1,10 @@
 #include "Incluir_Carta.c"
 
-int tirarCartaDoMontePrincipal(Fila *monte, DEQUE **espacos)
+int tirarCartaDoMontePrincipal(Fila **monte, DEQUE **espacos)
 {
 	short jogada;
 	short opcao;
-	char *carta = carta_naipe(monte);
+	char *carta = carta_naipe(*monte);
 	system("clear || cls");
 
 	printf("\nCarta virada: %s \n\n", carta);
@@ -37,7 +37,7 @@ int tirarCartaDoMontePrincipal(Fila *monte, DEQUE **espacos)
 		printf("\nCarta inserida no x1 com sucesso\n");
 		break;
 	case 3:
-		enfileirar(&monte, monte->inicio->carta_fila.carta, monte->inicio->carta_fila.naipe);
+		enfileirar(&monte, (*monte)->inicio->carta_fila.carta, (*monte)->inicio->carta_fila.naipe);
 		desenfileirar(&monte);
 		printf("\nCarta descartada com sucesso\n");
 	default:

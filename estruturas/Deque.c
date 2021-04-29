@@ -97,45 +97,38 @@ void inserir_fim(DEQUE **deque, int valor, char *naipe){
 	exit(1);
 }
 
-void remover_inicio(DEQUE **deque){
-	NO_DEQUE *q;
-	NO_DEQUE *qq;
+NO_DEQUE *remover_inicio(DEQUE **deque){
+	NO_DEQUE *q, *qq;
 	
 	if(!deque_vazio(*deque)){
 		q = (*deque)->inicio;
 		if((*deque)->inicio == (*deque)->fim){
 			qq = (*deque)->fim;
 			iniciar_deque(deque);
-			desalocar_no(&q);
-			desalocar_no(&qq);
-			return;
+			return qq;
 		}
 		(q->proximo)->anterior = NULL;
 		(*deque)->inicio = q->proximo;
-		desalocar_no(&q);
-		return;
+		return q;
 	}
 	
 	printf("\nErro deque vazio.");
+	return 0;
 }
 
-void remover_fim(DEQUE **deque){
-	NO_DEQUE *q;
-	NO_DEQUE *qq;
+NO_DEQUE *remover_fim(DEQUE **deque){
+	NO_DEQUE *q, *qq;
 	
 	if(!deque_vazio(*deque)){
 		q = (*deque)->fim;
 		if((*deque)->inicio == (*deque)->fim){
 			qq = (*deque)->inicio;
 			iniciar_deque(deque);
-			desalocar_no(&q);
-			desalocar_no(&qq);
-			return;
+			return qq;
 		}
 		(q->anterior)->proximo = NULL;
 		(*deque)->fim = q->anterior;
-		desalocar_no(&q);
-		return;
+		return q;
 	}
 	
 	printf("\nErro deque vazio.");
