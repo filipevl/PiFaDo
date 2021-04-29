@@ -1,76 +1,73 @@
 #include "../componentes/Carta.c"
+#include <stdio.h>
 
-#define MAX_TAM 3
-#include<stdio.h>
-
-typedef struct sPilha {
-    Carta info[MAX_TAM];
-    int topo;
+typedef struct sPilha
+{
+    Carta carta;
+    struct sPilha *baixo;
 } Pilha;
 
-void inicializar(Pilha* pilha) {
-    pilha->topo=-1;
+Pilha *alocarPilha()
+{
+    return malloc(sizeof(Pilha));
 }
 
-int pilhaVazia(Pilha* pilha) {
-    if(pilha->topo==-1)
-        return 1;
+void inicializarPilha(Pilha **ptr)
+{
+    *ptr = 0;
+}
 
+int pilhaVazia(Pilha *ptr)
+{
+    if (ptr == 0)
+        return 1;
     return 0;
 }
 
-int pilhaCheia(Pilha* pilha) {
-    if(pilha ->topo == (MAX_TAM-1))
-        return 1;
+int inserirPilha(Carta carta, Pilha **ptr)
+{
+    Pilha *novo = alocarPilha();
 
-    return 0;
-}
-
-
-int push(Pilha* pilha, Carta* carta) {
-    if(pilhaCheia(pilha))
+    if (novo == 0)
+    {
         return 0;
-	
-	pilha->topo++;
-    pilha->info[pilha->topo].carta;
+    }
+    
+    novo->carta = carta;
+
+    if (pilhaVazia(*ptr))
+    {
+        (*ptr) = novo;
+        novo->baixo = 0;
+    }
+    else
+    {
+        novo->baixo = (*ptr);
+        (*ptr) = novo;
+    }
     return 1;
 }
 
-Carta *pop(Pilha* pilha) {
+Carta removerPilha(Pilha **ptr)
+{
+    Pilha *aux_pilha;
+    Carta aux;
 
+    if (pilhaVazia(*ptr))
+        return aux;
 
-    if(pilhaVazia(pilha))
-        return NULL;
-        
-	pilha->info[pilha->topo].carta=0;
-	strcpy(pilha->info[pilha->topo].naipe,"");
-	pilha->topo--;   
- 	
-    return NULL;
-}
+    aux = (*ptr)->carta;
 
-void imprimirCarta(Pilha* pilha) {
-    if(!pilhaVazia(pilha))
-        printf("\nNome: %d - Idade: %s.", pilha->info[pilha->topo].carta, pilha->info[pilha->topo].naipe);
-}
-
-void imprimirTodos(Pilha* pilha) {
-    Pilha aux;
-    inicializar(&aux);
-
-    while(pilha->topo != -1) {
-        imprimirCarta(pilha);
-        push(&aux, pop(pilha));
+    if ((*ptr)->baixo == 0)
+    {
+        free((*ptr));
+        (*ptr) = 0;
     }
-
-    while(aux.topo != -1)
-        push(pilha, pop(&aux));
-
-    printf("\n");
-}
-void imprimirPilhaDel(Pilha* pilha) { // mostrar cartas que ja foram removidas
-    while(pilha->topo != -1) {
-        imprimirCarta(pilha);
-        pop(pilha);
+    else
+    {
+        aux_pilha = (*ptr);
+        (*ptr) = (aux_pilha)->baixo;
+        free(aux_pilha);
     }
+    return aux;
 }
