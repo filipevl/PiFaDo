@@ -65,8 +65,7 @@ void jogo()
 	DEQUE *espaco1[4], *espaco2[4];
 
 	// gerando baralhos com intervalo de 1 segundo para a funcao randomica gerar valores diferentes
-	if(gerar_baralho_aleatorio(&baralho1, &monte1))
-		printf("Passou\n");
+	gerar_baralho_aleatorio(&baralho1, &monte1);
 
 	printf("Pressione /Enter/ para embaralhar os baralhos");
 	getchar();
