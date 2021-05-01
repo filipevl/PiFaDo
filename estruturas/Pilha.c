@@ -1,4 +1,3 @@
-#include "../componentes/Carta.c"
 #include <stdio.h>
 
 typedef struct sPilha
@@ -52,9 +51,13 @@ Carta removerPilha(Pilha **ptr)
 {
     Pilha *aux_pilha;
     Carta aux;
+    aux.carta = 99; // a fim de testes para carta invalida;
 
     if (pilhaVazia(*ptr))
+    {
+        printf("Nenhuma carta no espaco\n");
         return aux;
+    }
 
     aux = (*ptr)->carta;
 
