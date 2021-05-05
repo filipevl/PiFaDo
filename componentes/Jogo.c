@@ -71,7 +71,8 @@ void jogo()
 	int i;
 	int loop_jogo = 1;					  //variavel que para o loop do jogo
 	int jogador = 1;					  // variavel que indica qual jogador esta realizando a acao
-	int pontos_jogador1, pontos_jogador2; //variavel que representa os pontos dos jogadores
+	int pontos_jogador1 = 0; 		      //variavel que representa os pontos dos jogadores
+	int pontos_jogador2 = 0; 			  //variavel que representa os pontos dos jogadores
 	//criando estruturas que geram os baralhos
 	Fila *monte1 = 0;
 	Fila *monte2 = 0;
@@ -127,7 +128,7 @@ void jogo()
 				if (tirarCartaDoMontePrincipal(&monte1, espaco1, &ptrPilha[0]))
 				{
 					pontos_jogador1++;
-					printf("\nParabens jogador 1 voce marcou 1 ponto!");
+					printf("\nParabens jogador 1 voce marcou 1 ponto! PONTOS: %d", pontos_jogador1);
 				}
 				if (pontos_jogador1 == 5)
 				{				   // verificando se o jogador 1 venceu o jogo
@@ -142,7 +143,7 @@ void jogo()
 				if (tirarCartaDoMontePrincipal(&monte2, espaco2, &ptrPilha[1]))
 				{
 					pontos_jogador2++;
-					printf("\nParabens jogador 1 voce marcou 1 ponto!");
+					printf("\nParabens jogador 1 voce marcou 1 ponto! PONTOS: %d", pontos_jogador2);
 				}
 				if (pontos_jogador2 == 5)
 				{				   // verificando se o jogador 1 venceu o jogo
@@ -151,7 +152,7 @@ void jogo()
 				}
 			}
 
-			//jogador++;
+			jogador++;
 			if (jogador == 3)
 			{
 				jogador = 1;
@@ -172,7 +173,7 @@ void jogo()
 				printf("%d de %s retirado do espaco escolhido\n", topo.carta, topo.naipe);
 				inserirNosEspacos(topo, espaco2, &monte2);
 			}
-			//jogador++;
+			jogador++;
 			if (jogador == 3)
 			{
 				jogador = 1;
