@@ -23,18 +23,11 @@ int inserirNosEspacos(Carta carta, DEQUE **espacos)
 
 int inserirNaPilha(Carta carta, Pilha **ptr)
 {
-	int espaco;
-	do
-	{
-		printf("\nOpcoes\n1. Inserir no espaco X1\n2. Inserir no espaco X2\nDigite uma opcao valida: ");
-		scanf("%d", &espaco);
-		getchar();
-	} while (espaco < 1 && espaco > 2);
-	espaco--;
-	if (inserirPilha(carta, &ptr[espaco]))
+	if (inserirPilha(carta, ptr))
 		return 1;
 	return 0;
 }
+
 int tirarCartaDoMontePrincipal(Fila **monte, DEQUE **espacos, Pilha **ptrPilha)
 {
 	short jogada;
@@ -45,7 +38,7 @@ int tirarCartaDoMontePrincipal(Fila **monte, DEQUE **espacos, Pilha **ptrPilha)
 
 	do
 	{
-		printf("\nOpcoes\n1. Inserir nos espacos E1,E2,E3,E4\n2. Inserir no espaco X1\n3. Descartar no fim do baralho\nDigite uma opcao valida: ");
+		printf("\nOpcoes\n1. Inserir nos espacos E1,E2,E3,E4\n2. Inserir no espaco extra\n3. Descartar no fim do baralho\nDigite uma opcao valida: ");
 		scanf("%d", &jogada);
 		getchar();
 	} while (jogada < 1 && jogada > 3);
@@ -78,20 +71,17 @@ void jogo()
 	int loop_jogo = 1;					  //variavel que para o loop do jogo
 	int jogador = 1;					  // variavel que indica qual jogador esta realizando a acao
 	int pontos_jogador1, pontos_jogador2; //variavel que representa os pontos dos jogadores
-	int opcaoDeEspacoX1ouX2;
 	//criando estruturas que geram os baralhos
 	Fila *monte1 = 0;
 	Fila *monte2 = 0;
 	Baralho baralho1 = novoBaralho();
 	Baralho baralho2 = novoBaralho();
-	Pilha *ptrPilha1[2];
-	Pilha *ptrPilha2[2];
+	Pilha *ptrPilha[2];
 	Carta topo;
 
 	for (int i = 0; i < 2; i++)
 	{
-		inicializarPilha(&ptrPilha1[i]);
-		inicializarPilha(&ptrPilha2[i]);
+		inicializarPilha(&ptrPilha[i]);
 	}
 
 	//criando estruturas que geram os espacos e1,e2,e3,e4
@@ -120,7 +110,6 @@ void jogo()
 		int contador = 0;  // contador de cartas
 		char *valor_carta; // mostra o valor da carta
 		int jogada;		   // variavel que decide acao do jogador
-		NO_DEQUE *aux;	   // var para checar quantas cartas ja existem nos espacos
 
 		do
 		{
@@ -134,7 +123,7 @@ void jogo()
 			//jogador tira a primeira carta do seu respectivo monte
 			if (jogador == 1)
 			{
-				if (tirarCartaDoMontePrincipal(&monte1, espaco1, ptrPilha1))
+				if (tirarCartaDoMontePrincipal(&monte1, espaco1, &ptrPilha[0]))
 				{
 					pontos_jogador1++;
 					printf("\nParabens jogador 1 voce marcou 1 ponto!");
@@ -149,7 +138,7 @@ void jogo()
 
 			if (jogador == 2)
 			{
-				if (tirarCartaDoMontePrincipal(&monte2, espaco2, ptrPilha2))
+				if (tirarCartaDoMontePrincipal(&monte2, espaco2, &ptrPilha[1]))
 				{
 					pontos_jogador2++;
 					printf("\nParabens jogador 1 voce marcou 1 ponto!");
@@ -171,29 +160,14 @@ void jogo()
 		{
 			if (jogador == 1)
 			{
-				do
-				{
-					printf("\nOpcoes\n1. Remover do espaco X1\n2. Remover do espaco X2\nDigite uma opcao valida: ");
-					scanf("%d", &opcaoDeEspacoX1ouX2);
-				} while (opcaoDeEspacoX1ouX2 < 1 || opcaoDeEspacoX1ouX2 > 2);
 
-				opcaoDeEspacoX1ouX2--;
-
-				topo = removerPilha(ptrPilha1[opcaoDeEspacoX1ouX2]);
+				topo = removerPilha(&ptrPilha[0]);
 				printf("%d de %s retirado do espaco escolhido\n", topo.carta, topo.naipe);
 				inserirNosEspacos(topo, espaco1);
 			}
 			if (jogador == 2)
 			{
-				do
-				{
-					printf("\nOpcoes\n1. Remover do espaco X1\n2. Remover do espaco X2\nDigite uma opcao valida: ");
-					scanf("%d", &opcaoDeEspacoX1ouX2);
-				} while (opcaoDeEspacoX1ouX2 < 1 || opcaoDeEspacoX1ouX2 > 2);
-
-				opcaoDeEspacoX1ouX2--;
-
-				topo = removerPilha(ptrPilha2[opcaoDeEspacoX1ouX2]);
+				topo = removerPilha(&ptrPilha[1]);
 				printf("%d de %s retirado do espaco escolhido\n", topo.carta, topo.naipe);
 				inserirNosEspacos(topo, espaco2);
 			}
