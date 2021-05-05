@@ -68,6 +68,7 @@ int tirarCartaDoMontePrincipal(Fila **monte, DEQUE **espacos, Pilha **ptrPilha)
 
 void jogo()
 {
+	int i;
 	int loop_jogo = 1;					  //variavel que para o loop do jogo
 	int jogador = 1;					  // variavel que indica qual jogador esta realizando a acao
 	int pontos_jogador1, pontos_jogador2; //variavel que representa os pontos dos jogadores
@@ -79,7 +80,7 @@ void jogo()
 	Pilha *ptrPilha[2];
 	Carta topo;
 
-	for (int i = 0; i < 2; i++)
+	for (i = 0; i < 2; i++)
 	{
 		inicializarPilha(&ptrPilha[i]);
 	}
@@ -97,7 +98,7 @@ void jogo()
 	gerar_baralho_aleatorio(&baralho2, &monte2);
 
 	//iniciando os espacos e1,e2,e3,e4 dos 2 jogadores
-	for (int i = 0; i < 4; i++)
+	for (i = 0; i < 4; i++)
 	{
 		alocar_deque(&espaco1[i]);
 		alocar_deque(&espaco2[i]);
@@ -150,7 +151,7 @@ void jogo()
 				}
 			}
 
-			jogador++;
+			//jogador++;
 			if (jogador == 3)
 			{
 				jogador = 1;
@@ -171,7 +172,7 @@ void jogo()
 				printf("%d de %s retirado do espaco escolhido\n", topo.carta, topo.naipe);
 				inserirNosEspacos(topo, espaco2);
 			}
-			jogador++;
+			//jogador++;
 			if (jogador == 3)
 			{
 				jogador = 1;
