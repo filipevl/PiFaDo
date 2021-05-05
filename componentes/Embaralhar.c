@@ -4,9 +4,11 @@
 
 int gerar_fila_baralho(Fila **fila, Baralho *baralho, int *ordem)
 {
+	int i;
+	
 	iniciar_fila(fila);
 
-	for (int i = 0; i < TAM_BARALHO; i++)
+	for (i = 0; i < TAM_BARALHO; i++)
 	{
 		if (!enfileirar(fila,
 						baralho->cartas[ordem[i]].carta,
@@ -18,7 +20,9 @@ int gerar_fila_baralho(Fila **fila, Baralho *baralho, int *ordem)
 
 int existe_indice(int *indices_inclusos, int valor, int total)
 {
-	for (int i = 0; i < total; i++)
+	int i;
+	
+	for (i = 0; i < total; i++)
 	{
 		if (indices_inclusos[i] == valor)
 		{
