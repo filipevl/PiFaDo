@@ -9,14 +9,14 @@ int eh_igual(int a, int b, int c)
 
 int eh_sucessor(int a, int b, int c)
 {
-	if (a + 1 == b && b + 1 == c)
+	if (c + (1 % 13) == b && b + (1 % 13) == a)
 		return 1;
 	return 0;
 }
 
 int eh_antecessor(int a, int b, int c)
 {
-	if (c - 1 == b && b - 1 == a)
+	if (a - (1 % 13) == b && b - (1 % 13) == c)
 		return 1;
 	return 0;
 }
@@ -37,13 +37,12 @@ int eh_sequencia(DEQUE *deque)
 
 		if (eh_igual(valores[0], valores[1], valores[2]))
 			return 1;
-
+		
 		if (
 			eh_antecessor(valores[0], valores[1], valores[2]) ||
 			eh_antecessor(valores[1], valores[2], valores[0]) ||
 			eh_antecessor(valores[2], valores[0], valores[1]))
 			return 1;
-
 		if (
 			eh_sucessor(valores[0], valores[1], valores[2]) ||
 			eh_sucessor(valores[1], valores[2], valores[0]) ||
