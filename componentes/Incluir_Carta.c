@@ -104,7 +104,7 @@ char *toString(int num)
 
 char *carta_naipe(Carta carta_desempilhada)
 {
-	char *carta = calloc(15,sizeof(char));
+	char *carta = calloc(15, sizeof(char));
 	strcpy(carta, toString(carta_desempilhada.carta));
 	switch (carta_desempilhada.carta)
 	{
@@ -171,10 +171,11 @@ int dequeValido(DEQUE *espaco)
 	return 0;
 }
 
-int inserir_carta_espaco(DEQUE **espaco, Carta carta_nova)
+int inserir_carta_espaco(DEQUE **espaco, Carta carta_nova, Fila **ptrFila)
 {
 	NO_DEQUE *aux, *aux2; // var para checar quantas cartas ja existem nos espa�os, e inserir uma terceira carta entre 2 cartas
 	int contador = 0;	  // contador de cartas
+	Carta auxCarta;
 
 	if (!deque_vazio(*espaco))
 	{ // se o deque nao estiver vazio
@@ -218,11 +219,21 @@ int inserir_carta_espaco(DEQUE **espaco, Carta carta_nova)
 	contador++; // se o jogador possuir 3 cartas ao fim da jogada entao verificamos pontos
 	if (contador == 3)
 	{
-		apagar_todos_nos(espaco);
-
 		if (eh_sequencia(*espaco))
 		{
+			apagar_todos_nos(espaco);
 			return 1;
+		}
+		else
+		{
+			auxCarta = remover_inicio(espaco)->cartas;
+			enfileirar(ptrFila, auxCarta.carta, auxCarta.naipe);
+
+			auxCarta = remover_inicio(espaco)->cartas;
+			enfileirar(ptrFila, auxCarta.carta, auxCarta.naipe);
+
+			auxCarta = remover_inicio(espaco)->cartas;
+			enfileirar(ptrFila, auxCarta.carta, auxCarta.naipe);
 		}
 	}
 

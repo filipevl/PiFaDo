@@ -1,7 +1,7 @@
 #include "Incluir_Carta.c"
 #include "../estruturas/Pilha.c"
 
-int inserirNosEspacos(Carta carta, DEQUE **espacos)
+int inserirNosEspacos(Carta carta, DEQUE **espacos, Fila **ptrFila)
 {
 	if (carta.carta == 99)
 		return 0;
@@ -16,7 +16,7 @@ int inserirNosEspacos(Carta carta, DEQUE **espacos)
 	} while (opcao < 1 && opcao > 4);
 
 	opcao--;
-	if (inserir_carta_espaco(&espacos[opcao], carta))
+	if (inserir_carta_espaco(&espacos[opcao], carta, ptrFila))
 		return 1;
 	return 0;
 }
@@ -46,7 +46,7 @@ int tirarCartaDoMontePrincipal(Fila **monte, DEQUE **espacos, Pilha **ptrPilha)
 	switch (jogada)
 	{
 	case 1:
-		if (inserirNosEspacos(carta_cima, espacos))
+		if (inserirNosEspacos(carta_cima, espacos, monte))
 			return 1;
 		enfileirar(monte, carta_cima.carta, carta_cima.naipe);
 		return 0;
@@ -164,13 +164,13 @@ void jogo()
 
 				topo = removerPilha(&ptrPilha[0]);
 				printf("%d de %s retirado do espaco escolhido\n", topo.carta, topo.naipe);
-				inserirNosEspacos(topo, espaco1);
+				inserirNosEspacos(topo, espaco1, &monte1);
 			}
 			if (jogador == 2)
 			{
 				topo = removerPilha(&ptrPilha[1]);
 				printf("%d de %s retirado do espaco escolhido\n", topo.carta, topo.naipe);
-				inserirNosEspacos(topo, espaco2);
+				inserirNosEspacos(topo, espaco2, &monte2);
 			}
 			//jogador++;
 			if (jogador == 3)
