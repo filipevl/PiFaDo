@@ -15,29 +15,19 @@ typedef struct sDEQUE
 
 void alocar_no(NO_DEQUE **no)
 {
-	*no = (NO_DEQUE *)malloc(sizeof(NO_DEQUE));
+	*no = (NO_DEQUE*)malloc(sizeof(NO_DEQUE));
 }
 
-int iniciar_deque(DEQUE **deque)
+void iniciar_deque(DEQUE **deque)
 {
-	if ((*deque) != 0)
-	{
-		(*deque)->inicio = NULL;
-		(*deque)->fim = NULL;
-		return 1;
-	}
-	return 0;
+	(*deque)->inicio = NULL;
+	(*deque)->fim = NULL;
 }
 
-int alocar_deque(DEQUE **deque)
+void alocar_deque(DEQUE **deque)
 {
-	*deque = (DEQUE *)malloc(sizeof(DEQUE));
-	if ((*deque) != 0)
-	{
-		iniciar_deque(deque);
-		return 1;
-	}
-	return 0;
+	*deque = (DEQUE*)malloc(sizeof(DEQUE));
+	iniciar_deque(deque);
 }
 
 void iniciar_no(NO_DEQUE **no)
@@ -46,9 +36,12 @@ void iniciar_no(NO_DEQUE **no)
 }
 
 void desalocar_no(NO_DEQUE **no)
-{
-	free(no);
+{	
+	printf("\n0");
+	free(*no);
+	printf("\n1");
 	*no = NULL;
+	printf("\n2");
 }
 
 void desalocar_deque(DEQUE **deque)
