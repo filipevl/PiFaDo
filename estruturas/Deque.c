@@ -37,11 +37,8 @@ void iniciar_no(NO_DEQUE **no)
 
 void desalocar_no(NO_DEQUE **no)
 {	
-	printf("\n0");
 	free(*no);
-	printf("\n1");
 	*no = NULL;
-	printf("\n2");
 }
 
 void desalocar_deque(DEQUE **deque)
