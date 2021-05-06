@@ -9,7 +9,7 @@ int eh_igual(int a, int b, int c)
 
 int verifica_sequencia(int a, int b, int c)
 {
-	if(a == 13 && b == (a + 1) % 13 && c == (a + 2) % 13){
+	if(a == 13 && b == (a + 2) % 13 && c == (a + 1) % 13){
 		return 1;
 	}	
 	if (a - 1 == b && (b - 1 == c || (a + 1) % 13 == c)){
