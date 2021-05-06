@@ -80,14 +80,14 @@ void jogo()
 	Baralho baralho2 = novoBaralho();
 	Pilha *ptrPilha[2];
 	Carta topo;
+	//criando estruturas que geram os espacos e1,e2,e3,e4
+	DEQUE *espaco1[4], *espaco2[4];
 
 	for (i = 0; i < 2; i++)
 	{
 		inicializarPilha(&ptrPilha[i]);
 	}
 
-	//criando estruturas que geram os espacos e1,e2,e3,e4
-	DEQUE *espaco1[4], *espaco2[4];
 
 	// gerando baralhos com intervalo de 1 segundo para a funcao randomica gerar valores diferentes
 	gerar_baralho_aleatorio(&baralho1, &monte1);
