@@ -18,7 +18,7 @@ int verifica_sequencia(int a, int b, int c)
 	return 0;
 }
 
-int eh_sequencia(DEQUE *deque)
+int jogador_marcou_ponto(DEQUE *deque)
 {
 	int valores[3];
 
@@ -202,13 +202,16 @@ int inserir_carta_espaco(DEQUE **espaco, Carta carta_nova, Fila **ptrFila)
 	contador++; // se o jogador possuir 3 cartas ao fim da jogada entao verificamos pontos
 	if (contador == 3)
 	{
-		if (eh_sequencia(*espaco))
+		if (jogador_marcou_ponto(*espaco)) // verifica se o jogador marcou pontos
 		{
+			// se sim apago os nos e o return um autoriza a adicao de 1 ponto para o jogador
 			apagar_todos_nos(espaco);
 			return 1;
 		}
 		else
 		{
+			// se nao imprimo que as cartas vao voltar ao final do baralho
+			printf("\nNenhuma sequencia ou cartas do mesmo valor indentificados as cartas voltaram ao fim do baralho.");
 			auxCarta = remover_inicio(espaco)->cartas;
 			enfileirar(ptrFila, auxCarta.carta, auxCarta.naipe);
 
