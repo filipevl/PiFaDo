@@ -7,7 +7,7 @@ int eh_igual(int a, int b, int c)
 	return 0;
 }
 
-int eh_antecessor(int a, int b, int c)
+int verifica_sequencia(int a, int b, int c)
 {
 	if(a == 13 && b == (a + 1) % 13 && c == (a + 2) % 13){
 		return 1;
@@ -20,32 +20,19 @@ int eh_antecessor(int a, int b, int c)
 
 int eh_sequencia(DEQUE *deque)
 {
-	int igual;
 	int valores[3];
-	if (deque_vazio(deque))
-		return 0;
-	else if (deque->inicio == 0 || (deque->inicio)->proximo == 0 || deque->fim == 0)
-		return 0;
-	else
-	{
-		valores[0] = deque->inicio->cartas.carta;
-		valores[1] = ((deque->inicio)->proximo)->cartas.carta;
-		valores[2] = deque->fim->cartas.carta;
 
-		if (eh_igual(valores[0], valores[1], valores[2]))
-			return 1;
+	valores[0] = deque->inicio->cartas.carta;
+	valores[1] = ((deque->inicio)->proximo)->cartas.carta;
+	valores[2] = deque->fim->cartas.carta;
+
+	if (eh_igual(valores[0], valores[1], valores[2]))
+		return 1;
 		
-		if (
-			eh_antecessor(valores[0], valores[1], valores[2]) ||
-			eh_antecessor(valores[1], valores[2], valores[0]) ||
-			eh_antecessor(valores[2], valores[0], valores[1]))
-			return 1;
-		if (
-			eh_sucessor(valores[0], valores[1], valores[2]) ||
-			eh_sucessor(valores[1], valores[2], valores[0]) ||
-			eh_sucessor(valores[2], valores[0], valores[1]))
-			return 1;
+	if (verifica_sequencia(valores[0], valores[1], valores[2])){
+		return 1;
 	}
+		
 	return 0;
 }
 
