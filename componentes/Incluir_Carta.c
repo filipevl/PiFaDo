@@ -7,17 +7,14 @@ int eh_igual(int a, int b, int c)
 	return 0;
 }
 
-int eh_sucessor(int a, int b, int c)
-{
-	if (c + (1 % 13) == b && b + (1 % 13) == a)
-		return 1;
-	return 0;
-}
-
 int eh_antecessor(int a, int b, int c)
 {
-	if (a - (1 % 13) == b && b - (1 % 13) == c)
+	if(a == 13 && b == (a + 1) % 13 && c == (a + 2) % 13){
 		return 1;
+	}	
+	if (a - 1 == b && (b - 1 == c || (a + 1) % 13 == c)){
+		return 1;
+	}	
 	return 0;
 }
 
