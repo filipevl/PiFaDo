@@ -7,8 +7,7 @@ int eh_igual(int a, int b, int c)
 	return 0;
 }
 
-int verifica_sequencia(int a, int b, int c)
-{
+int verifica_sequencia(int a, int b, int c){
 	if(a == 13 && b == (a + 2) % 13 && c == (a + 1) % 13){
 		return 1;
 	}	
@@ -18,8 +17,7 @@ int verifica_sequencia(int a, int b, int c)
 	return 0;
 }
 
-int jogador_marcou_ponto(DEQUE *deque)
-{
+int jogador_marcou_ponto(DEQUE *deque){
 	int valores[3];
 
 	valores[0] = deque->inicio->cartas.carta;
@@ -36,10 +34,8 @@ int jogador_marcou_ponto(DEQUE *deque)
 	return 0;
 }
 
-char *toString(int num)
-{
-	switch (num)
-	{
+char *toString(int num){
+	switch (num){
 	case 1:
 		return "A ";
 		break;
@@ -134,8 +130,7 @@ char *carta_naipe(Carta carta_desempilhada)
 	return carta;
 }
 
-int numeroDeCartasNoDeque(DEQUE *espaco)
-{
+int numeroDeCartasNoDeque(DEQUE *espaco){
 	int cont;
 	NO_DEQUE *aux;
 	aux = espaco->inicio;
@@ -147,42 +142,40 @@ int numeroDeCartasNoDeque(DEQUE *espaco)
 	return cont;
 }
 
-int dequeValido(DEQUE *espaco)
-{
+int dequeValido(DEQUE *espaco){
 	if (numeroDeCartasNoDeque(espaco) < 4)
 		return 1;
 	return 0;
 }
 
-int inserir_carta_espaco(DEQUE **espaco, Carta carta_nova, Fila **ptrFila)
-{
+int inserir_carta_espaco(DEQUE **espaco, Carta carta_nova, Fila **ptrFila){
 	NO_DEQUE *aux, *aux2; // var para checar quantas cartas ja existem nos espa�os, e inserir uma terceira carta entre 2 cartas
 	int contador = 0;	  // contador de cartas
 	Carta auxCarta;
 
-	if (!deque_vazio(*espaco))
-	{ // se o deque nao estiver vazio
+	if (!deque_vazio(*espaco)){
+	// se o deque nao estiver vazio
 		aux = (*espaco)->inicio;
-		while ((*espaco)->inicio != NULL)
-		{				// checando quantas cartas ja tem no baralho
+		while ((*espaco)->inicio != NULL){ // checando quantas cartas ja tem no baralho
+						
 			contador++; // contando quantos elementos ja existem no espaco
 			(*espaco)->inicio = (*espaco)->inicio->proximo;
 		}
 		(*espaco)->inicio = aux;
-		if ((*espaco)->inicio->cartas.carta <= carta_nova.carta)
-		{ // se a primeira carta do espaco for menor ou igual a nova
+		if ((*espaco)->inicio->cartas.carta <= carta_nova.carta){ // se a primeira carta do espaco for menor ou igual a nova
+		
 			// se a carta for maior que todas que o espaco possui
 			inserir_inicio(espaco, carta_nova.carta, carta_nova.naipe);
 			imprimir(*espaco);
 		}
-		else if ((*espaco)->inicio->cartas.carta > carta_nova.carta && (*espaco)->fim->cartas.carta > carta_nova.carta)
-		{
+		else if ((*espaco)->inicio->cartas.carta > carta_nova.carta && (*espaco)->fim->cartas.carta > carta_nova.carta){
+		
 			// se a carta for menor que todos que o espaco possui
 			inserir_fim(espaco, carta_nova.carta, carta_nova.naipe);
 			imprimir(*espaco);
 		}
-		else if ((*espaco)->inicio->cartas.carta > carta_nova.carta && (*espaco)->fim->cartas.carta <= carta_nova.carta)
-		{
+		else if ((*espaco)->inicio->cartas.carta > carta_nova.carta && (*espaco)->fim->cartas.carta <= carta_nova.carta){
+		
 			// se a carta for maior que a ultima e menor que a primeira
 			aux = (*espaco)->fim;
 			aux2 = (*espaco)->inicio;
@@ -193,33 +186,36 @@ int inserir_carta_espaco(DEQUE **espaco, Carta carta_nova, Fila **ptrFila)
 			imprimir(*espaco);
 		}
 	}
-	else
-	{ // se o deque estiver vazio
+	else{ // se o deque estiver vazio
+	 
 		inserir_inicio(espaco, carta_nova.carta, carta_nova.naipe);
 		imprimir(*espaco);
 	}
 
 	contador++; // se o jogador possuir 3 cartas ao fim da jogada entao verificamos pontos
-	if (contador == 3)
-	{
-		if (jogador_marcou_ponto(*espaco)) // verifica se o jogador marcou pontos
-		{
+	if (contador == 3){
+	
+		if (jogador_marcou_ponto(*espaco)){ // verifica se o jogador marcou pontos
+		
 			// se sim apago os nos e o return um autoriza a adicao de 1 ponto para o jogador
 			apagar_todos_nos(espaco);
 			return 1;
 		}
-		else
-		{
+		else{
+		
 			// se nao imprimo que as cartas vao voltar ao final do baralho
 			printf("\nNenhuma sequencia ou cartas do mesmo valor indentificados as cartas voltaram ao fim do baralho.");
 			auxCarta = remover_inicio(espaco)->cartas;
 			enfileirar(ptrFila, auxCarta.carta, auxCarta.naipe);
+			printf("\nvalor %d %s\n", (*ptrFila)->fim->carta_fila.carta, (*ptrFila)->fim->carta_fila.naipe);
 
 			auxCarta = remover_inicio(espaco)->cartas;
 			enfileirar(ptrFila, auxCarta.carta, auxCarta.naipe);
+			printf("\nvalor %d %s\n", (*ptrFila)->fim->carta_fila.carta, (*ptrFila)->fim->carta_fila.naipe);
 
 			auxCarta = remover_inicio(espaco)->cartas;
 			enfileirar(ptrFila, auxCarta.carta, auxCarta.naipe);
+			printf("\nvalor %d %s\n", (*ptrFila)->fim->carta_fila.carta, (*ptrFila)->fim->carta_fila.naipe);
 		}
 	}
 
