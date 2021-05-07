@@ -1,77 +1,64 @@
 #include "../componentes/Embaralhar.c"
 
-typedef struct sNO_DEQUE
-{
+typedef struct sNO_DEQUE{
 	Carta cartas;
 	struct sNO_DEQUE *proximo;
 	struct sNO_DEQUE *anterior;
 } NO_DEQUE;
 
-typedef struct sDEQUE
-{
+typedef struct sDEQUE{
 	struct sNO_DEQUE *inicio;
 	struct sNO_DEQUE *fim;
 } DEQUE;
 
-void alocar_no(NO_DEQUE **no)
-{
+void alocar_no(NO_DEQUE **no){
 	*no = (NO_DEQUE*)malloc(sizeof(NO_DEQUE));
 }
 
-void iniciar_deque(DEQUE **deque)
-{
+void iniciar_deque(DEQUE **deque){
 	(*deque)->inicio = NULL;
 	(*deque)->fim = NULL;
 }
 
-void alocar_deque(DEQUE **deque)
-{
+void alocar_deque(DEQUE **deque){
 	*deque = (DEQUE*)malloc(sizeof(DEQUE));
 	iniciar_deque(deque);
 }
 
-void iniciar_no(NO_DEQUE **no)
-{
+void iniciar_no(NO_DEQUE **no){
 	*no = NULL;
 }
 
-void desalocar_no(NO_DEQUE **no)
-{	
+void desalocar_no(NO_DEQUE **no){	
 	free(*no);
 	*no = NULL;
 }
 
-void desalocar_deque(DEQUE **deque)
-{
+void desalocar_deque(DEQUE **deque){
 	free(deque);
 	*deque = NULL;
 }
 
-int deque_vazio(DEQUE *deque)
-{
+int deque_vazio(DEQUE *deque){
 
-	if (deque->inicio == NULL && deque->fim == NULL)
-	{
+	if (deque->inicio == NULL && deque->fim == NULL){
 		return 1;
 	}
 
 	return 0;
 }
 
-void inserir_inicio(DEQUE **deque, int valor, char *naipe)
-{
+void inserir_inicio(DEQUE **deque, int valor, char *naipe){
 	NO_DEQUE *novo;
 
 	alocar_no(&novo);
 
-	if (novo != NULL)
-	{
+	if (novo != NULL){
 		novo->cartas.carta = valor;
 		strcpy(novo->cartas.naipe, naipe);
 		novo->anterior = NULL;
 		novo->proximo = NULL;
-		if (deque_vazio(*deque))
-		{
+		if (deque_vazio(*deque)){
 			(*deque)->inicio = novo;
 			(*deque)->fim = novo;
 			return;
@@ -86,19 +73,16 @@ void inserir_inicio(DEQUE **deque, int valor, char *naipe)
 	exit(1);
 }
 
-void inserir_fim(DEQUE **deque, int valor, char *naipe)
-{
+void inserir_fim(DEQUE **deque, int valor, char *naipe){
 	NO_DEQUE *novo;
 
 	alocar_no(&novo);
-	if (novo != NULL)
-	{
+	if (novo != NULL){
 		novo->cartas.carta = valor;
 		strcpy(novo->cartas.naipe, naipe);
 		novo->anterior = NULL;
 		novo->proximo = NULL;
-		if (deque_vazio(*deque))
-		{
+		if (deque_vazio(*deque)){
 			(*deque)->inicio = novo;
 			(*deque)->fim = novo;
 			return;
@@ -113,15 +97,12 @@ void inserir_fim(DEQUE **deque, int valor, char *naipe)
 	exit(1);
 }
 
-NO_DEQUE *remover_inicio(DEQUE **deque)
-{
+NO_DEQUE *remover_inicio(DEQUE **deque){
 	NO_DEQUE *q, *qq;
 
-	if (!deque_vazio(*deque))
-	{
+	if (!deque_vazio(*deque)){
 		q = (*deque)->inicio;
-		if ((*deque)->inicio == (*deque)->fim)
-		{
+		if ((*deque)->inicio == (*deque)->fim){
 			qq = (*deque)->fim;
 			iniciar_deque(deque);
 			return qq;
@@ -135,15 +116,12 @@ NO_DEQUE *remover_inicio(DEQUE **deque)
 	return 0;
 }
 
-NO_DEQUE *remover_fim(DEQUE **deque)
-{
+NO_DEQUE *remover_fim(DEQUE **deque){
 	NO_DEQUE *q, *qq;
 
-	if (!deque_vazio(*deque))
-	{
+	if (!deque_vazio(*deque)){
 		q = (*deque)->fim;
-		if ((*deque)->inicio == (*deque)->fim)
-		{
+		if ((*deque)->inicio == (*deque)->fim){
 			qq = (*deque)->inicio;
 			iniciar_deque(deque);
 			return qq;
@@ -156,16 +134,13 @@ NO_DEQUE *remover_fim(DEQUE **deque)
 	printf("\nErro deque vazio.");
 }
 
-void imprimir(DEQUE *deque)
-{
+void imprimir(DEQUE *deque){
 	NO_DEQUE *inicio, *fim;
 
-	if (!deque_vazio(deque))
-	{
+	if (!deque_vazio(deque)){
 		inicio = deque->inicio;
 		fim = deque->fim;
-		while (deque->inicio != NULL)
-		{
+		while (deque->inicio != NULL){
 			printf("\nValor: %d | naipe: %s", deque->inicio->cartas.carta, deque->inicio->cartas.naipe);
 			deque->inicio = deque->inicio->proximo;
 		}
@@ -177,14 +152,11 @@ void imprimir(DEQUE *deque)
 	printf("\nErro lista vazia.");
 }
 
-void apagar_todos_nos(DEQUE **deque)
-{
+void apagar_todos_nos(DEQUE **deque){
 	NO_DEQUE *q;
 
-	if (!deque_vazio(*deque))
-	{
-		while ((*deque)->inicio != NULL)
-		{
+	if (!deque_vazio(*deque)){
+		while ((*deque)->inicio != NULL){
 			q = (*deque)->inicio;
 			(*deque)->inicio = (*deque)->inicio->proximo;
 			desalocar_no(&q);
