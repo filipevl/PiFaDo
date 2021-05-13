@@ -11,7 +11,7 @@ int inserirNosEspacos(Carta carta, DEQUE **espacos, Fila **ptrFila){
 
 		scanf("%d", &opcao);
 		getchar();
-	} while (opcao < 1 && opcao > 4);
+	} while (opcao < 1 || opcao > 4);
 
 	opcao--;
 	if (inserir_carta_espaco(&espacos[opcao], carta, ptrFila)){
@@ -29,7 +29,7 @@ int inserirNaPilha(Carta carta, Pilha **ptr){
 
 int tirarCartaDoMontePrincipal(Fila **monte, DEQUE **espacos, Pilha **ptrPilha){
 
-	short jogada;
+	int jogada;
 	Carta carta_cima = desenfileirar(monte);
 	char *carta = carta_naipe(carta_cima);
 
@@ -40,7 +40,7 @@ int tirarCartaDoMontePrincipal(Fila **monte, DEQUE **espacos, Pilha **ptrPilha){
 		printf("\nOpcoes\n1. Inserir nos espacos E1,E2,E3,E4\n2. Inserir no espaco extra\n3. Descartar no fim do baralho\nDigite uma opcao valida: ");
 		scanf("%d", &jogada);
 		getchar();
-	} while (jogada < 1 && jogada > 3);
+	}while(jogada < 1 || jogada > 3);
 
 	switch (jogada){
 	
